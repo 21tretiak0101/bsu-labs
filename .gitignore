@@ -1,0 +1,6 @@
+#C++ items
+CMakeLists.txt
+cmake-build-debug
+
+# IDE specific folder for JetBrains IDEs
+.idea/
