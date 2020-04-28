@@ -4,8 +4,12 @@
 
 class FileNotepadRepository: public NotepadRepository {
 private:
-     Notepad* notepad = Notepad::getInstance();
+     Notepad* notepad;
 public:
+    FileNotepadRepository() {
+        notepad = Notepad::getInstance();
+    }
+
     void save(Note note) override {
         notepad->save(note);
     }
@@ -27,11 +31,11 @@ public:
     }
 
     void init() override {
-        notepad->serialize();
+        notepad->deserialize();
     }
 
     void destroy() override {
-        notepad->deserialize();
+        notepad->serialize();
     }
 };
 

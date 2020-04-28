@@ -7,8 +7,7 @@ public:
         if (service.exists(id)) {
             service.removeNote(id);
             ConsoleHelper::success();
-        }
-        else {
+        } else {
             ConsoleHelper::println(NoteExistsException().what());
         }
     }

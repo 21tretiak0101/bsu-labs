@@ -12,8 +12,7 @@ public:
         if (service.exists(id)) {
             Note note = service.getNote(id);
             ConsoleHelper::println(note.toString());
-        }
-        else {
+        } else {
             ConsoleHelper::println(NoteExistsException().what());
         }
     }

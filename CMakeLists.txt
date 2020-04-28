@@ -3,6 +3,9 @@ project(cpp_labs)
 
 set(CMAKE_CXX_STANDARD 14)
 
+#[[cereal library adding]]
+include_directories(${Boost_INCLUDE_DIR})
+
 add_executable(cpp_labs
        #[[ src/app/functions/functions.h
         src/app/students/students.h]]
@@ -27,3 +30,6 @@ add_executable(cpp_labs
         src/app/notepad-app/src/command/Operation.h
         src/app/notepad-app/src/command/NoneCommand.h
         src/app/notepad-app/src/exception/NumberFormatException.h)
+
+link_directories(libs/cereal)
+

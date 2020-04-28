@@ -72,8 +72,7 @@ public:
         try {
             string line = readLine();
             return parseInt(line);
-        }
-        catch (NumberFormatException& e) {
+        } catch (NumberFormatException& e) {
             ConsoleHelper::println(e.what());
         }
         return DEFAULT_ERROR_NUMBER;
@@ -89,8 +88,9 @@ private:
     }
 
     static int parseInt(string& str) {
-        if (!isNumber(str))
+        if (!isNumber(str)) {
             throw NumberFormatException(str);
+        }
         return stoi(str);
     }
 };
