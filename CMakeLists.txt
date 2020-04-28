@@ -30,6 +30,3 @@ add_executable(cpp_labs
         src/app/notepad-app/src/command/Operation.h
         src/app/notepad-app/src/command/NoneCommand.h
         src/app/notepad-app/src/exception/NumberFormatException.h)
-
-link_directories(libs/cereal)
-
