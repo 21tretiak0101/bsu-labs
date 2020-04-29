@@ -12,13 +12,13 @@ The following dependencies are necessary:
   
 **Building and starting the app**    
 
-To build app run the following commands on the repository root folder:    
+To build app, run the following commands in the repository root folder:    
   
  `$ cmake .  `  
  
  `$ make  `  
  
 The CMake will create executable "cpp_labs" file.  
-To start it run the following command:  
+To start it, run the following command:  
    
  `$ ./cpp_labs `
