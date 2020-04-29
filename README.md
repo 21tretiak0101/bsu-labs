@@ -12,7 +12,7 @@ The following dependencies are necessary:
   
 **Building and starting the app**    
 
-To build app, run the following commands on the root folder of the repository:    
+To build app run the following commands on the repository root folder:    
   
  `$ cmake .  `  
  
