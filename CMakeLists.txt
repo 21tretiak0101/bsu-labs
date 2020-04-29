@@ -9,8 +9,8 @@ include_directories(${CEREAL_LIBRARY})
 #[[cereal library]]
 
 add_executable(cpp_labs
-       #[[ src/app/functions/functions.h
-        src/app/students/students.h]]
+        #[[src/app/functions/functions.h]]
+        #[[src/app/students/students.h]]
         src/app/notepad-app/src/entity/Notepad.h
         src/app/notepad-app/src/service/NotepadService.h
         src/app/notepad-app/src/NotepadApplication.cpp
