@@ -46,12 +46,12 @@ int main() {
     word.readValue();
 
     int asciiSum = 0;
-    for (char c : word.getValue()) {
+    for (char& c : word.getValue()) {
         asciiSum += c;
     }
 
     Word copy(word);
-    for (char c: copy.getValue()) {
+    for (char& c: copy.getValue()) {
         if (c > 'n') {
             c = 'f';
         }
