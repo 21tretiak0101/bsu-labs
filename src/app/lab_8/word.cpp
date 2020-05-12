@@ -51,7 +51,7 @@ int main() {
     }
 
     Word copy(word);
-    for (char& c: copy.getValue()) {
+    for (char c: copy.getValue()) {
         if (c > 'n') {
             c = 'f';
         }
