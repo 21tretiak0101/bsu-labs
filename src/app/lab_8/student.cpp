@@ -263,7 +263,6 @@ double getCourseAverageMark(Database& database, int course) {
         }
     }
     fin.close();
-    cout << totalMark / courseStudentsNumber;
     return totalMark / courseStudentsNumber;
 }
 
