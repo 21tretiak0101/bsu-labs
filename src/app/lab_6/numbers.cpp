@@ -19,7 +19,7 @@ enum Format {
  */
 const int TYPES_NUMBER = 3;
 
-string file_not_open(string& path) {
+string file_not_open(const string& path) {
     return "File with path: [" + path + "] cannot be opened.";
 }
 
@@ -29,21 +29,6 @@ void writeInt(ofstream& out, int value, Format format = BINARY) {
     } else {
         out << value << " ";
     }
-}
-
-void writeInt(string& path, int value, Format format = BINARY) {
-    std::ios_base::openmode mode = format == BINARY ? ios::binary : ios::in;
-    ofstream out;
-    out.open(path, mode | ios::app);
-    if (!out.is_open()) {
-        throw invalid_argument(file_not_open(path));
-    }
-    if (format == BINARY) {
-        out.write((char*) &value, sizeof(value));
-    } else {
-        out << value << " ";
-    }
-    out.close();
 }
 
 int readInt(ifstream& in, Format format = BINARY) {
@@ -61,11 +46,15 @@ int readInt(ifstream& in, Format format = BINARY) {
  * @param readFrom - path to the file with numbers
  * @param writeTo - path to new file with sorted numbers
  */
-void sortNumbers(string& readFrom, string& writeTo, Format format = BINARY) {
+void sortNumbers(const string& readFrom, const string& writeTo, Format format = BINARY) {
     for (int i = 0; i < TYPES_NUMBER; ++i) {
         ifstream in(readFrom, format == BINARY ? ios::binary : ios::in);
+        ofstream writer(readFrom, format == BINARY ? ios::binary : ios::in);
         if (!in.is_open()) {
             throw invalid_argument(file_not_open(readFrom));
+        }
+        if (!writer.is_open()) {
+            throw invalid_argument(file_not_open(writeTo));
         }
         while (!in.eof()) {
             int number = readInt(in, format);
@@ -75,14 +64,15 @@ void sortNumbers(string& readFrom, string& writeTo, Format format = BINARY) {
             if ((i == 0 && number < 0)
                     || (i == 1 && number == 0)
                     || (i == 2 && number > 0)) {
-                writeInt(writeTo, number, format);
+                writeInt(writer, number, format);
             }
         }
         in.close();
+        writer.close();
     }
 }
 
-void writeNumbers(string& path, int* numbers, int size, Format format = BINARY) {
+void writeNumbers(const string& path, int* numbers, int size, Format format = BINARY) {
     ofstream out(path, format == BINARY ? ios::binary : ios::in);
     if (!out.is_open()) {
         throw invalid_argument(file_not_open(path));
@@ -93,7 +83,7 @@ void writeNumbers(string& path, int* numbers, int size, Format format = BINARY) 
     out.close();
 }
 
-void printNumbers(string& path, Format format = BINARY) {
+void printNumbers(const string& path, Format format = BINARY) {
     ifstream in(path, format == BINARY ? ios::binary : ios::in);
     if (!in.is_open()) {
         throw invalid_argument(file_not_open(path));
