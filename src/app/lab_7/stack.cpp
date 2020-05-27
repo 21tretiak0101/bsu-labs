@@ -1,8 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <stack>
 
-using std::stack;
 using std::string;
 using std::endl;
 using std::cout;
