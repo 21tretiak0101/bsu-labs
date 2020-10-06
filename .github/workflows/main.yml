@@ -1,0 +1,29 @@
+name: test
+on:
+  push:
+    branches: [master]
+
+jobs:
+  testing-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set-up node.js
+        uses: actions/setup-node@v1.4.3
+        with:
+          node-version: '12'
+
+      - name: Clone repository
+        uses: actions/checkout@v1
+
+      - name: Install dependencies
+         run: |
+           cd js
+           npm install
+
+      - name: Run tests
+         run: |
+           cd js
+           npm test
+
+      - name: Print finish message
+         run: echo "Testing pipeline finished successfully !"
