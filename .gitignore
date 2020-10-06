@@ -1,5 +1,11 @@
 #C++ items
 cmake-build-debug
 
+# dependencies
+node_modules
+
+# System Files
+.DS_Store
+
 # IDE specific folder for JetBrains IDEs
-.idea/
+/.idea
