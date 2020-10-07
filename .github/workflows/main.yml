@@ -16,14 +16,14 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Install dependencies
-         run: |
-           cd js
-           npm install
+        run:  |
+          cd js
+          npm install
 
       - name: Run tests
-         run: |
-           cd js
-           npm test
+        run:  |
+          cd js
+          npm test
 
       - name: Print finish message
-         run: echo "Testing pipeline finished successfully !"
+        run:  echo "Testing pipeline finished successfully !"
