@@ -71,4 +71,20 @@ function gaussianElimination(data) {
   return answer;
 }
 
-module.exports = gaussianElimination;
+function residual(matrix, answers) {
+  return matrix.reduce((max, row) => {
+    let leftSum = 0;
+    answers.forEach((constant, index) => {
+      leftSum += matrix[index] * constant;
+    })
+    const difference = abs(leftSum - row[row.length - 1]);
+    return difference > max
+        ? difference
+        : max
+  }, 0)
+}
+
+module.exports = {
+  gaussianElimination,
+  residual
+}

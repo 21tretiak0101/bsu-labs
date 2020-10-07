@@ -1,4 +1,4 @@
-const gaussianElimination = require('./gaussian');
+const {gaussianElimination, residual} = require('./gaussian');
 const readMatrixFromFile = require('./service');
 
 describe('gaussianElimination function', ()=> {
@@ -22,9 +22,16 @@ describe('gaussianElimination function', ()=> {
   })
 
   test('should be equal to expected', () => {
-    const path = 'src/assets/data.txt';
     const data = [[1, 2, 3], [4, 5, 6]];
     const expected = [-1, 2];
     expect(gaussianElimination(data)).toEqual(expected);
+  })
+})
+
+describe("residual function", () => {
+  const matrix = [[1, 2, 3], [4, 5, 6]];
+  const answers = gaussianElimination(matrix);
+  test("should return 0", () => {
+    expect(residual(matrix, answers)).toEqual(0);
   })
 })
