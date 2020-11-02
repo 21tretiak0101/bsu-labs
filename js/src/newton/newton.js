@@ -40,7 +40,7 @@ function newton(equations, approximation, options = DEFAULT_OPTIONS) {
   let solution = [];
   let iterations = options.limit;
 
-  const differences = [...approximation];
+  const difference = [...approximation];
 
   for (let i = 0; i < options.limit; i++) {
     // 1. create jacobi matrix
@@ -52,12 +52,12 @@ function newton(equations, approximation, options = DEFAULT_OPTIONS) {
       }
       matrix.push(row);
 
-      differences[index] = -equation(...approximation)
+      difference[index] = -equation(...approximation)
       return matrix;
     }, []);
 
     //2. solve jacobi matrix
-    const delta = gaussian(jacobi, differences);
+    const delta = gaussian(jacobi, difference);
 
     const previousApproximation = [...approximation];
     approximation = delta.map((el, index) => el + approximation[index]);
