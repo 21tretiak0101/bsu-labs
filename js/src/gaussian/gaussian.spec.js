@@ -1,7 +1,7 @@
 const {gaussianElimination, residual} = require('./gaussian');
-const readMatrixFromFile = require('./service');
+const readMatrixFromFile = require('../service');
 
-describe('gaussianElimination function', ()=> {
+describe('gaussianElimination function', () => {
   let path = '';
   test('should throw error', () => {
     path = 'src/assets/matrix_without_solution-1.txt';

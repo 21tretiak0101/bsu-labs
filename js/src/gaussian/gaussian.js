@@ -9,12 +9,6 @@ function getEmptyArray(length) {
   return array;
 }
 
-function createCopy(matrix) {
-  const copy = [];
-  matrix.forEach(row => copy.push(row));
-  return copy;
-}
-
 function swapRows(matrix, rowNum1, rowNum2) {
   const buffer = matrix[rowNum1];
   matrix[rowNum1] = matrix[rowNum2];
@@ -22,7 +16,8 @@ function swapRows(matrix, rowNum1, rowNum2) {
 }
 
 function gaussianElimination(data) {
-  const matrix = createCopy(data);
+  const matrix = [...data];
+
   const rowsLength = matrix.length;
 
   for (let i = 0; i < rowsLength; i++) {
@@ -84,7 +79,15 @@ function residual(matrix, answers) {
   }, 0)
 }
 
+function gaussian(data, constants) {
+  return gaussianElimination(data.map((el, index) => {
+    el.push(constants[index]);
+    return el;
+  }));
+}
+
 module.exports = {
   gaussianElimination,
+  gaussian,
   residual
 }
