@@ -3,11 +3,18 @@ const {gaussian} = require('../gaussian/gaussian');
 const abs = Math.abs;
 const max = Math.max;
 
-function derivative(func, h) {
+/**
+ * The derivative of a function
+ *
+ * @param func - an antiderivative function
+ * @param accuracy - method accuracy
+ * @return {function(*, *): number}
+ */
+function derivative(func, accuracy) {
   return function(args, varNumber) {
     const increment = [...args];
-    increment[varNumber] = args[varNumber] + h;
-    return (func(...increment) - func(...args)) / h;
+    increment[varNumber] = args[varNumber] + accuracy;
+    return (func(...increment) - func(...args)) / accuracy;
   };
 }
 
@@ -33,7 +40,7 @@ function newton(equations, approximation, options = DEFAULT_OPTIONS) {
   let solution = [];
   let iterations = options.limit;
 
-  const b = [...approximation];
+  const differences = [...approximation];
 
   for (let i = 0; i < options.limit; i++) {
     // 1. create jacobi matrix
@@ -45,12 +52,12 @@ function newton(equations, approximation, options = DEFAULT_OPTIONS) {
       }
       matrix.push(row);
 
-      b[index] = -equation(...approximation)
+      differences[index] = -equation(...approximation)
       return matrix;
     }, []);
 
     //2. solve jacobi matrix
-    const delta = gaussian(jacobi, b);
+    const delta = gaussian(jacobi, differences);
 
     const oldApproximations = [...approximation];
     approximation = delta.map((el, index) => el + approximation[index]);
