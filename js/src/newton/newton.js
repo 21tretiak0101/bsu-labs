@@ -6,7 +6,7 @@ const max = Math.max;
 /**
  * The derivative of a function
  *
- * @param func - an antiderivative function
+ * @param func - function
  * @param accuracy - method accuracy
  * @return {function(*, *): number}
  */
@@ -59,12 +59,12 @@ function newton(equations, approximation, options = DEFAULT_OPTIONS) {
     //2. solve jacobi matrix
     const delta = gaussian(jacobi, differences);
 
-    const oldApproximations = [...approximation];
+    const previousApproximation = [...approximation];
     approximation = delta.map((el, index) => el + approximation[index]);
 
     //3. calculate residual vector
     const residual = max(...approximation.map((delta, index) => {
-      return abs(delta - oldApproximations[index])
+      return abs(delta - previousApproximation[index])
     }));
 
     if (residual < options.eps) {
