@@ -14,7 +14,9 @@ function derivative(func, accuracy) {
   return function(args, varNumber) {
     const increment = [...args];
     increment[varNumber] = args[varNumber] + accuracy;
-    return (func(...increment) - func(...args)) / accuracy;
+    const decrement = [...args];
+    decrement[varNumber] = args[varNumber] - accuracy;
+    return (func(...increment) - func(...decrement)) / (2 * accuracy);
   };
 }
 
