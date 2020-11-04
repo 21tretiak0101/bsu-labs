@@ -21,7 +21,7 @@ function derivative(func, accuracy) {
 }
 
 const DEFAULT_LIMIT = 50;
-const DEFAULT_ACCURACY = 0.00001;
+const DEFAULT_ACCURACY = 0.00000001;
 const DEFAULT_EPSILON = 10e-9;
 
 const DEFAULT_OPTIONS = {
