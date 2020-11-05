@@ -1,10 +1,10 @@
 const fileSystem = require('fs')
 
-function X(x, y) {
+function y1(x, y) {
   return  x * (0.4 - 0.01 * y);
 }
 
-function Y(x, y) {
+function y2(x, y) {
   return  (-0.3 + 0.005 * x) * y;
 }
 
@@ -15,7 +15,11 @@ const DEFAULT_FRACTION_DIGITS = 4;
  *
  * [solution for Lotka–Volterra equations]
  *
- * @param equations - array with equations (2 for Lotka–Volterra)
+ * @param equations - array with equations (2 for Lotka–Volterra).
+ *      Example: func( x1, x2, x3, integrationStep ).
+ *              If parameter 'integrationStep' exists,
+ *              it must to be the last function parameter.
+ *
  * @param initial - array with initial values (2 for Lotka–Volterra)
  * @param start - left integration border
  * @param limit - right integration border
@@ -31,7 +35,8 @@ function euler(equations, initial, start, limit, h) {
   let previousValues = [...initial];
   for (let i = start + 1; i <= limit; i++) {
     const values = equations.map((eq, index) => {
-      let value = h * eq(...previousValues) + previousValues[index];
+      let step = (i + 1) * h;
+      let value = h * eq(...previousValues, step) + previousValues[index];
       return +value.toFixed(DEFAULT_FRACTION_DIGITS);
     });
     answer.push(data(i, values));
@@ -59,4 +64,4 @@ function writeResults(result, filename) {
 }
 
 //example
-writeResults(euler([X, Y], [70, 50], 1, 364, 0.15), "example.txt");
+writeResults(euler([y1, y2], [70, 50], 1, 364, 0.15), "example.txt");
