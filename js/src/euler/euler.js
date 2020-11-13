@@ -1,4 +1,4 @@
-const fileSystem = require('fs')
+const fileSystem = require('fs');
 
 function y1(x, y) {
   return  x * (0.4 - 0.01 * y);
