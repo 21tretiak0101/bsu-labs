@@ -1,7 +1,7 @@
 {
   "name": "bsu-labs",
   "version": "1.0.0",
-  "description": "",
+  "description": "javascript labs",
   "scripts": {
     "test": "jest"
   },
