@@ -1,4 +1,7 @@
 name: test
+env: 
+  SCRIPTS_LOCATION: "js/"
+  
 on:
   push:
     branches: [master]
@@ -16,14 +19,10 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Install dependencies
-        run:  |
-          cd js
-          npm install
+        run:  npm install --prefix {{ env.SCRIPTS_LOCATION }}
 
       - name: Run tests
-        run:  |
-          cd js
-          npm test
+        run:  npm test --prefix {{ env.SCRIPTS_LOCATION }}
 
       - name: Print finish message
         run:  echo "Testing pipeline finished successfully !"
