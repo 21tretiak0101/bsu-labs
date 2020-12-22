@@ -1,4 +1,5 @@
 const fileSystem = require('fs');
+const {newton} = require('../newton/newton');
 
 function y1(x, y) {
   return  x * (0.4 - 0.01 * y);
@@ -45,6 +46,30 @@ function euler(equations, initial, start, limit, h) {
   return answer;
 }
 
+function eulerImplicit(equations, initial, start, limit, h) {
+    const data = (step, result) => {
+      return {
+        step,
+        result: result.map(value => +value.toFixed(DEFAULT_FRACTION_DIGITS))
+      }
+    };
+    const answer = [data(start, initial)];
+    let previousValues = [...initial];
+    for (let i = start + 1; i <= limit; i++) {
+      let step = (i + 1) * h;
+      const functions = equations.map((eq, index) => {
+        return (...args) => {
+           return args[index] - previousValues[index] - eq(...args, step) * h;
+        }
+      });
+      const values = equations.map(eq => eq(...previousValues, step));
+      const {solution} = newton(functions, values);
+      previousValues = [...solution];
+      answer.push(data(i, solution));
+    }
+    return answer;
+}
+
 /**
  * Write Lotka–Volterra results to a file.
  *
@@ -63,5 +88,13 @@ function writeResults(result, filename) {
   });
 }
 
-//example
-writeResults(euler([y1, y2], [70, 50], 1, 364, 0.15), "example.txt");
+
+/*
+* example
+* */
+
+/*
+  writeResults(euler([y1, y2], [70, 50], 1, 364, 0.15), "example.txt");
+  writeResults(eulerImplicit([y1, y2], [70, 50], 1, 364, 0.15), "example.txt");
+ */
+
