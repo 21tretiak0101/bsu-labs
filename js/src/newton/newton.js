@@ -64,12 +64,15 @@ function newton(equations, approximation, options = DEFAULT_OPTIONS) {
     const previousApproximation = [...approximation];
     approximation = delta.map((el, index) => el + approximation[index]);
 
-    //3. calculate residual vector
+    //3. compute the residual vector
     const residual = max(...approximation.map((delta, index) => {
       return abs(delta - previousApproximation[index])
     }));
 
-    if (residual < options.eps) {
+    //4. compute the condition number
+    let conditionNumber = computeConditionNumber(difference, delta);
+
+    if (residual < options.eps && conditionNumber < options.eps) {
       solution = [...approximation];
       iterations = i + 1;
       break;
@@ -84,6 +87,15 @@ function newton(equations, approximation, options = DEFAULT_OPTIONS) {
     solution,
     iterations
   }
+}
+
+function computeConditionNumber(difference, delta) {
+  const normVector = difference.map((value, index) => {
+    return abs(value) <= 1 ? abs(delta[index]) : abs(delta[index] / value);
+  });
+  return normVector.reduce((max, value) => {
+    return value > max ? abs(value) : max;
+  }, 0);
 }
 
 module.exports = {
