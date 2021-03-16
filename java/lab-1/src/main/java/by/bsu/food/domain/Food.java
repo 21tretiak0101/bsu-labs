@@ -24,10 +24,10 @@ public abstract class Food implements Consumable {
 
     @Override
     public boolean equals(Object obj) {
-        if (!super.equals(obj)) {
+        if (!(obj instanceof Food)) {
             return false;
         }
-        if (!(obj instanceof Food)) {
+        if (Objects.isNull(name)) {
             return false;
         }
         Food food = (Food) obj;
