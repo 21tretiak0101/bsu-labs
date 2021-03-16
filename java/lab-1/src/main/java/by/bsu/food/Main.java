@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         FoodProcessor processor = new FoodProcessor();
         List<Food> breakfast = Arrays.stream(args)
-                .map(ar -> ar.split("/"))
+                .map(arguments -> arguments.split("/"))
                 .map(item -> {
                     String foodName = item[0];
                     String[] arguments = Arrays.copyOfRange(item, 1, item.length);
