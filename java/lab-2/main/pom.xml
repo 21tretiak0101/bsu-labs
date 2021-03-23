@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>lab-2</artifactId>
+        <groupId>by.bsu.labs</groupId>
+        <version>1.0</version>
+    </parent>
+
+    <groupId>by.bsu.main</groupId>
+    <artifactId>main</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>by.bsu.processors</groupId>
+            <artifactId>processors</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>by.bsu.storage</groupId>
+            <artifactId>storage</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
