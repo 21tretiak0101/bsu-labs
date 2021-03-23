@@ -5,23 +5,22 @@ import by.bsu.containers.Flower;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 public class FlowersStatistics {
     public static final Integer DEFAULT_RANGE_STEP = 20;
 
-    public List<String> getFlowersAmount(List<Flower> flowers) {
+    public List<String> groupByAmount(List<Flower> flowers) {
         return flowers.stream()
-                .collect(Collectors.groupingBy(Flower::getName, Collectors.counting()))
+                .collect(groupingBy(Flower::getName, TreeMap::new, counting()))
                 .entrySet().stream()
-                .sorted(Map.Entry.comparingByKey())
                 .map((entry) -> String.format("%s: %d", entry.getKey(), entry.getValue()))
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
-    public Map<String, List<Flower>> groupingByRange(List<Flower> flowers) {
-        return flowers.stream()
-                .collect(Collectors.groupingBy(this::range, TreeMap::new, Collectors.toList()));
+    public Map<String, List<Flower>> groupByRange(List<Flower> flowers) {
+        return flowers.stream().collect(groupingBy(this::range, TreeMap::new, toList()));
     }
 
     private String range(Flower flower) {

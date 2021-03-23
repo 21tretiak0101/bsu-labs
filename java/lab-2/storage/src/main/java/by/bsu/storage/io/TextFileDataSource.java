@@ -6,7 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class TextFileDataSource {
     private final String filename;
@@ -17,7 +18,7 @@ public class TextFileDataSource {
 
     public List<String> load() {
         try (BufferedReader reader = Files.newBufferedReader(Path.of(filename))) {
-            return reader.lines().collect(Collectors.toList());
+            return reader.lines().collect(toList());
         } catch (IOException e) {
             System.out.println(e.toString());
             return new ArrayList<>();

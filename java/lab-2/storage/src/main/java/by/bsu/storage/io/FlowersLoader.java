@@ -5,7 +5,8 @@ import by.bsu.containers.Flower;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class FlowersLoader {
     private final String filename;
@@ -21,12 +22,12 @@ public class FlowersLoader {
     public List<Flower> load(String delimiter) {
         return new TextFileDataSource(filename).load().stream()
                 .map(line -> line.split(delimiter))
-                .map(this::loadFlower)
+                .map(this::toFlower)
                 .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
-    private Flower loadFlower(String ...params) {
+    private Flower toFlower(String ...params) {
         try {
             String name = params[0];
             Integer length = Integer.parseInt(params[1]);
