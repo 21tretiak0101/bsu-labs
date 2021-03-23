@@ -11,6 +11,6 @@ public class Main {
     public static void main(String ...args) {
         List<Flower> flowers = new FlowersLoader(args[0]).load();
         FlowersStatistics statistics = new FlowersStatistics();
-        new FlowerDataExporter(args[0]).uploadAmount(statistics.getFlowersAmount(flowers));
+        new FlowerDataExporter(args[0]).uploadAmount(statistics.groupByAmount(flowers));
     }
 }

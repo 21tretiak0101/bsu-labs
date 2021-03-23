@@ -1,6 +1,5 @@
 package by.bsu.storage.export;
 
-
 import by.bsu.containers.Flower;
 
 import java.io.BufferedWriter;
@@ -19,27 +18,27 @@ public class FlowerDataExporter {
     }
 
     public void uploadRangeOfLength(Map<String, List<Flower>> statistics) {
-        try (BufferedWriter writer = Files.newBufferedWriter(Path.of(filename))) {
-            String data = statistics.entrySet().stream()
-                    .map((entry) -> {
-                        String flowers = entry.getValue().stream()
-                                .map(Flower::toString)
-                                .collect(Collectors.joining(", "));
-                        return String.format("%s, %s", entry.getKey(), flowers);
-                    })
-                    .collect(Collectors.joining("\n"));
-            writer.write(data);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String data = statistics.entrySet().stream()
+                .map((entry) -> {
+                    String flowers = entry.getValue().stream()
+                            .map(Flower::toString)
+                            .collect(Collectors.joining(", "));
+                    return String.format("%s, %s", entry.getKey(), flowers);
+                })
+                .collect(Collectors.joining("\n"));
+        upload(data);
     }
 
     public void uploadAmount(List<String> statistics) {
+        String data = String.join("\n", statistics);
+        upload(data);
+    }
+
+    private void upload(String data) {
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(filename))) {
-            String data = String.join("\n", statistics);
             writer.write(data);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
     }
 }
