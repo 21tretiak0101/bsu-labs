@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/21tretiak0101/bsu-labs#readme",
   "dependencies": {
-    "mathjs": "^7.2.0",
+    "mathjs": "^7.5.1",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
